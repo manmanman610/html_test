@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+<body>
+  <button onclick="selectRandomNumbers()">랜덤 숫자 선택</button>
+  <div id="selectedNumbers"></div>
+
+  <script>
+      function selectRandomNumbers() {
+          const numbers = [];
+          for (let i = 1; i <= 45; i++) {
+              numbers.push(i);
+          }
+
+          const selectedNumbers = [];
+          while (selectedNumbers.length < 100) {
+              const randomIndex = Math.floor(Math.random() * numbers.length);
+              const randomNumber = numbers[randomIndex];
+              selectedNumbers.push(randomNumber);
+               // 이미 선택된 숫자는 다시 선택되지 않도록 제거 numbers.splice(randomIndex, 1);
+          }
+
+          const selectedNumbersDiv = document.getElementById('selectedNumbers');
+          selectedNumbersDiv.innerHTML = ''; // Clear the div
+
+          selectedNumbers.sort((a, b) => a - b); // 숫자를 오름차순으로 정렬
+          const selectedNumbersString = selectedNumbers.join(','); // 숫자를 콤마로 구분하여 문자열로 변환
+
+          const numberSpan = document.createElement('span');
+          numberSpan.textContent = selectedNumbersString;
+          selectedNumbersDiv.appendChild(numberSpan);
+
+          return false; // Prevent the default behavior of the button
+      }
+  </script>
+</body>
+</html>
